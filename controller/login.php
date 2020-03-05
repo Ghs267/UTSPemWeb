@@ -9,9 +9,10 @@
     $username = $_POST['username'];
     $pass = md5($_POST['password']);
     
-    $query = $db->prepare("SELECT * FROM account WHERE username= ? && pass= ?");
+    $query = $db->prepare("SELECT * FROM account WHERE (username= ? OR email= ?) && pass= ?");
     $query->bindParam(1, $username);
-    $query->bindParam(2, $pass);
+    $query->bindParam(2, $username);
+    $query->bindParam(3, $pass);
     $query->execute();
 
     $count = $query->rowCount();
@@ -27,7 +28,6 @@
         }
     }
     else{
-        //header("location:indexloginfail.php");
-        print $username . " " . $pass;
+        header("location:../view/indexlogin.php");
     }
 ?>

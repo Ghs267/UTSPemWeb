@@ -53,7 +53,7 @@
     </head>
     <body>
         <form id="captch_form" action="../controller/login.php" method="post" onSubmit="return validasi();">
-            <label>Username : </label>
+            <label>Username or Email : </label>
             <input type="text" name="username" id="username"><br>
             <label>Password :</label>
             <input type="password" name="password" id="password"><br>
