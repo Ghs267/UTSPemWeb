@@ -16,18 +16,30 @@
                 		
                 if (email != "" && pass!="") {
                     if(code == ''){
-                        //event.preventDefault();
+                        event.preventDefault();
                         alert('Enter Captcha Code');
                         return false;
                     }
                     else{
                         $.ajax({
-                        url:"../controller/login.php",
+                        url:"../controller/check_code.php",
                         method:"POST",
-                        data:{code:code}
+                        data:{code:code},
+                        success:function(data)
+                        {
+                        if(data == 'success')
+                        {
+                            $('#login').attr('disabled', false);
+                            return true;
+                        }
+                        else
+                        {
+                            //event.preventDefault();
+                            alert('Invalid Code');
+                        }
+                        }
                         });
-                        // event.preventDefault();
-                        return true;
+                        
                     }
                 }
                 else{
@@ -59,55 +71,3 @@
         $('#captcha_image').attr('src', '../model/image.php');
     }
 </script>
-
-<!-- <script>
- $(document).ready(function(){
-  
-  $('#captch_form').on('submit', function(event){
-   event.preventDefault();
-   if($('#captcha_code').val() == '')
-   {
-    alert('Enter Captcha Code');
-    $('#login').attr('disabled', 'disabled');
-    return false;
-   }
-   else
-   {
-    alert('Form has been validate with Captcha Code');
-    $('#captch_form')[0].reset(); //reset formnya
-    $('#captcha_image').attr('src', 'image.php'); //reset gambar
-   }
-  });
-
-  $('#captcha_code').on('blur', function(){
-   var code = $('#captcha_code').val();
-   
-   if(code == '')
-   {
-    alert('Enter Captcha Code');
-    $('#login').attr('disabled', 'disabled');
-   }
-   else
-   {
-    $.ajax({
-     url:"../controller/check_code.php",
-     method:"POST",
-     data:{code:code},
-     success:function(data)
-     {
-      if(data == 'success')
-      {
-       $('#login').attr('disabled', false);
-      }
-      else
-      {
-       $('#login').attr('disabled', 'disabled');
-       alert('Invalid Code');
-      }
-     }
-    });
-   }
-  });
-
- });
-</script> -->
