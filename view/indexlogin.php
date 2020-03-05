@@ -8,23 +8,39 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
-        <script>
+        <script type="text/javascript">
             function validasi() {
-                var email = document.getElementById("email").value;
-                var pass = document.getElementById("pass").value;		
+                var email = document.getElementById("username").value;
+                var pass = document.getElementById("password").value;
+                var code = document.getElementById("captcha_code").value;
+                		
                 if (email != "" && pass!="") {
-                    // event.preventDefault();
-                    return true;
+                    if(code == ''){
+                        //event.preventDefault();
+                        alert('Enter Captcha Code');
+                        return false;
+                    }
+                    else{
+                        $.ajax({
+                        url:"../controller/login.php",
+                        method:"POST",
+                        data:{code:code}
+                        });
+                        // event.preventDefault();
+                        return true;
+                    }
                 }
                 else{
                     alert('Username and Password must not be empty !');
                     return false;
                 }
-        }
+
+                
+             }
         </script>
     </head>
     <body>
-        <form action="../controller/login.php" method="post" onSubmit="return validasi()" id="captch_form">
+        <form id="captch_form" action="../controller/login.php" method="post" onSubmit="return validasi();">
             <label>Username : </label>
             <input type="text" name="username" id="username"><br>
             <label>Password :</label>

@@ -3,6 +3,9 @@
 
     include "../model/database.php";
 
+    session_start();
+
+    $code = $_POST['captcha_code'];
     $username = $_POST['username'];
     $pass = md5($_POST['password']);
     
@@ -14,12 +17,17 @@
     $count = $query->rowCount();
 
     if($count==1){
-        $_SESSION['username'] = $username;
-        $_SESSION['status'] = "login";
-        header("location:profile.php");
+        if($code == $_SESSION['captcha_code']){
+            $_SESSION['username'] = $username;
+            $_SESSION['status'] = "login";
+            header("location:../view/profile.php");
+        }
+        else{
+            header("location:../view/indexlogin.php");
+        }
     }
     else{
         //header("location:indexloginfail.php");
-        print "gagal";
+        print $username . " " . $pass;
     }
 ?>
