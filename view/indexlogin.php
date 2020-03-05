@@ -29,7 +29,8 @@
             <input type="text" name="username" id="username"><br>
             <label>Password :</label>
             <input type="password" name="password" id="password"><br>
-            <img src="../model/image.php" id="captcha_image" /><br>
+            <img src="../model/image.php" id="captcha_image" />
+            <button type="button" onClick="refresh();">refresh</button><br>
             <label>Code</label>
             <input type="text" name="captcha_code" id="captcha_code"><br>
             <button type="submit" id="login">LOGIN</button>
@@ -38,6 +39,12 @@
 </html>
 
 <script>
+    function refresh(){
+        $('#captcha_image').attr('src', '../model/image.php');
+    }
+</script>
+
+<!-- <script>
  $(document).ready(function(){
   
   $('#captch_form').on('submit', function(event){
@@ -51,8 +58,8 @@
    else
    {
     alert('Form has been validate with Captcha Code');
-    $('#captch_form')[0].reset();
-    $('#captcha_image').attr('src', 'image.php');
+    $('#captch_form')[0].reset(); //reset formnya
+    $('#captcha_image').attr('src', 'image.php'); //reset gambar
    }
   });
 
@@ -87,4 +94,4 @@
   });
 
  });
-</script>
+</script> -->

@@ -1,6 +1,8 @@
 
 <?php
 
+    include "../model/database.php";
+
     $username = $_POST['username'];
     $pass = md5($_POST['password']);
     
