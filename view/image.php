@@ -14,9 +14,9 @@
 
     $image = imagecreatetruecolor(200, 38);
 
-    $background_color = imagecolorallocate($image, 231, 100, 18);
+    $background_color = imagecolorallocate($image, 231, 100, 18); //bisa diganti rgb nya buat bg color
 
-    $text_color = imagecolorallocate($image, 255, 255, 255);
+    $text_color = imagecolorallocate($image, 255, 255, 255); //ganti rgb nya buat text color bs jg ini
 
     imagefilledrectangle($image, 0, 0, 200, 38, $background_color);
 

@@ -4,9 +4,11 @@
     include "../model/database.php";
 
     session_start();
+    
 
     $code = $_POST['captcha_code'];
     $username = $_POST['username'];
+    $error = "Incorrect password or username!";
     $pass = md5($_POST['password']);
     
     $query = $db->prepare("SELECT * FROM account WHERE (username= ? OR email= ?) && password= ?");
@@ -28,7 +30,8 @@
         }
     }
     else{
-        //header("location:../view/indexlogin.php");
-        print $password;
+        
+        $_SESSION['errors'] = $error;
+        header("location:../view/indexlogin.php");
     }
 ?>

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE hmtl>
 
 <html>
@@ -9,6 +13,14 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
         <script type="text/javascript">
+            var perfEntries = performance.getEntriesByType("navigation");
+
+            if (perfEntries[0].type === "back_forward") {
+                location.reload(true);
+            }
+            function refresh(){
+                $('#captcha_image').attr('src', '../model/image.php');
+            }
             function validasi() {
                 var email = document.getElementById("username").value;
                 var pass = document.getElementById("password").value;
@@ -54,6 +66,7 @@
         </script>
     </head>
     <body>
+    
         <form id="captch_form" action="../controller/login.php" method="post" onSubmit="return validasi();">
             <label>Username or Email : </label>
             <input type="text" name="username" id="username"><br>
@@ -66,13 +79,16 @@
                 <input type="text" name="captcha_code" id="captcha_code"><br>
                 <button type="button" onClick="captcha_validate();">Check</button><br>
             </div>
-            <button type="submit" id="login" disabled="true">LOGIN</button>
+            <button type="submit" id="login" disabled="true">LOGIN</button><br>
+            <?php
+                if(isset($_SESSION["errors"])){
+                    $error = $_SESSION["errors"];
+                    echo "<p style=\"color:red;\">$error</p>";
+                }
+            ?> 
         </form>
     </body>
 </html>
-
-<script>
-    function refresh(){
-        $('#captcha_image').attr('src', '../model/image.php');
-    }
-</script>
+<?php
+    unset($_SESSION["errors"]);
+?>
