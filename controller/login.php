@@ -9,7 +9,7 @@
     $username = $_POST['username'];
     $pass = md5($_POST['password']);
     
-    $query = $db->prepare("SELECT * FROM account WHERE (username= ? OR email= ?) && pass= ?");
+    $query = $db->prepare("SELECT * FROM account WHERE (username= ? OR email= ?) && password= ?");
     $query->bindParam(1, $username);
     $query->bindParam(2, $username);
     $query->bindParam(3, $pass);
@@ -28,6 +28,7 @@
         }
     }
     else{
-        header("location:../view/indexlogin.php");
+        //header("location:../view/indexlogin.php");
+        print $password;
     }
 ?>

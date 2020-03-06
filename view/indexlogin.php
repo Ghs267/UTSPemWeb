@@ -12,10 +12,18 @@
             function validasi() {
                 var email = document.getElementById("username").value;
                 var pass = document.getElementById("password").value;
-                var code = document.getElementById("captcha_code").value;
                 		
                 if (email != "" && pass!="") {
-                    if(code == ''){
+                    return true
+                }
+                else{
+                    alert('Username and Password must not be empty !');
+                    return false;
+                }
+             }
+             function captcha_validate(){
+                var code = document.getElementById("captcha_code").value;
+                if(code == ''){
                         event.preventDefault();
                         alert('Enter Captcha Code');
                         return false;
@@ -29,6 +37,8 @@
                         {
                         if(data == 'success')
                         {
+                            alert('Captcha verified!');
+                            $('#captcha_div').attr('hidden', true);
                             $('#login').attr('disabled', false);
                             return true;
                         }
@@ -39,15 +49,7 @@
                         }
                         }
                         });
-                        
                     }
-                }
-                else{
-                    alert('Username and Password must not be empty !');
-                    return false;
-                }
-
-                
              }
         </script>
     </head>
@@ -57,11 +59,14 @@
             <input type="text" name="username" id="username"><br>
             <label>Password :</label>
             <input type="password" name="password" id="password"><br>
-            <img src="../model/image.php" id="captcha_image" />
-            <button type="button" onClick="refresh();">refresh</button><br>
-            <label>Code</label>
-            <input type="text" name="captcha_code" id="captcha_code"><br>
-            <button type="submit" id="login">LOGIN</button>
+            <div id="captcha_div">
+                <img src="../model/image.php" id="captcha_image" />
+                <button type="button" onClick="refresh();">refresh</button><br>
+                <label>Code</label>
+                <input type="text" name="captcha_code" id="captcha_code"><br>
+                <button type="button" onClick="captcha_validate();">Check</button><br>
+            </div>
+            <button type="submit" id="login" disabled="true">LOGIN</button>
         </form>
     </body>
 </html>
