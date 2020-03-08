@@ -1,5 +1,6 @@
 
 <?php 
+    session_start();
     include "../model/database.php";
     $query = "SELECT * FROM account";
     $result = $db->query($query);
