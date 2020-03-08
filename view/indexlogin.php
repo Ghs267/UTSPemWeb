@@ -66,7 +66,7 @@
         </script>
     </head>
     <body>
-    
+        <h1>LOGIN chatMe</h1>
         <form id="captch_form" action="../controller/login.php" method="post" onSubmit="return validasi();">
             <label>Username or Email : </label>
             <input type="text" name="username" id="username"><br>
@@ -87,6 +87,7 @@
                 }
             ?> 
         </form>
+        <p>Don't have an account? <a href="register_form.php">REGISTER</a> here</p>
     </body>
 </html>
 <?php
