@@ -18,11 +18,14 @@
         <input type="email" name="email" id="email" required  placeholder="Email"><br><br>
         <input type="text" name="username" id="username" required  placeholder="Username"><br><br>
         <input type="password" name="password" id="password" required  placeholder="Password"><br><br>
-        <label>Tanggal Lahir</label><br>
-        <input type="date" name="birth_date" required  id="birth_date"><br><br>
+        <label>Birthdate</label><br>
+        <input type="date" name="birthdate" required  id="birth_date"><br><br>
         <label>Gender</label><br>
-        <input type="radio" name="gender" required  value="male">Male <br>
-        <input type="radio" name="gender"   value="female">Female <br><br>
+        <select name="gender">
+            <option disabled="disabled" selected="selected">Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select>
         <input type="submit" value="Submit" name="submit">
         <?php
             if(isset($_SESSION["errors"])){
