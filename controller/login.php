@@ -23,7 +23,7 @@
         if($code == $_SESSION['captcha_code']){
             $_SESSION['username'] = $username;
             $_SESSION['status'] = "login";
-            header("location:../view/profile.php");
+            header("location:../view/profil.php");
         }
         else{
             header("location:../view/indexlogin.php");

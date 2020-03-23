@@ -11,8 +11,9 @@
 </head>
 <body>
     <h3>Sign up system</h3>
-    <form action="../controller/register.php" method="post">
-        
+    <form action="../controller/register.php" method="post" enctype="multipart/form-data">
+        <label>Profile Picture</label>
+        <input type="file" name="file" id="poster" accept="image/jpeg, image/jpg, image/png"><br>
         <input type="text" name="firstname" id="firstname" required  placeholder="First Name" >
         <input type="text" name="lastname" id="lastname"  placeholder="Last Name" ><br><br>
         <input type="email" name="email" id="email" required  placeholder="Email"><br><br>

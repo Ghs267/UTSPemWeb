@@ -8,6 +8,11 @@
     $error = "Username/Email exist!";
 
     if(isset($_POST['submit'])){
+        // Image
+        $name = $_FILES['file']['name'];
+        $target_dir = "../model/img/";
+        $target_file = $target_dir . basename($_FILES["file"]["name"]);
+
         $firstname = htmlspecialchars($_POST['firstname']);
         $lastname =  htmlspecialchars ($_POST['lastname']);
         $email = htmlspecialchars($_POST['email']);
@@ -25,7 +30,8 @@
             $_SESSION['errors'] = $error;
             header("location:../view/register_form.php");
         }else{
-            $query = "INSERT into account VALUES ('$firstname','$lastname','$email','$username','".md5($password)."', '$birth_date','$gender')";
+            move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
+            $query = "INSERT into account VALUES ('$firstname','$lastname','$email','$username','".md5($password)."', '$birth_date','$gender', '$name')";
             $result = $db->query($query);
             if($result){
                 header("location:../view/register_success.php");
