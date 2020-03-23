@@ -86,8 +86,47 @@
             </div>
         </div>
 
-        <a href="../controller/logout.php"><button><span class="glyphicon glyphicon-log-out"></span></button></a>
+        <!-- TOMBOL LOGOUT -->
 
+        <a href="../controller/logout.php" ><button><span class="glyphicon glyphicon-log-out"></span></button></a>
+
+        <!-- FORM POST -->
+        <div>
+            <form action="../controller/addpost.php" method="post">
+                <?php 
+                    $result = $db->query("SELECT CONCAT_WS(' ', first_name, last_name) FROM account WHERE username='$username' OR email='$username'");
+                    $name = $result->fetch();
+                    echo '<textarea style="resize:none;" name="posting" rows="4" cols="50" placeholder="Share your day, ' . $name[0] . '.."></textarea>';
+                ?>
+                </br>
+                <input type="submit" value="Post">
+                
+            </form>
+            <br>
+
+            <!-- SHOW POST -->
+
+            <?php 
+                $query = "SELECT * FROM post JOIN account ON post.username = account.username WHERE account.username='$username' OR account.email='$username'";
+                //echo var_dump($query);die;
+                $result = $db->query($query);
+                //$post = $result->fetch();
+                //echo var_dump($post[0]);die;
+
+                foreach($result as $p){
+                    echo '<div class="container"><p>'.$p[2].'</p>';
+                    echo'<form action="../controller/addcomment.php">
+                        <input type="text" name="comment" placeholder="Add comment..">
+                        <input type="submit" value="comment">
+                    </form>
+                    </div>';
+                }
+                
+                $result = null;
+                $db = null;
+
+            ?>
+        </div>
     </div>
 
 </body>
