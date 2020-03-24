@@ -30,7 +30,11 @@
             $_SESSION['errors'] = $error;
             header("location:../view/register_form.php");
         }else{
-            move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
+            if($name == ""){
+                $name = "default.png";
+            }else{
+                move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
+            }
             $query = "INSERT into account VALUES ('$firstname','$lastname','$email','$username','".md5($password)."', '$birth_date','$gender', '$name')";
             $result = $db->query($query);
             if($result){

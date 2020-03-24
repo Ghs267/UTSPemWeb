@@ -107,7 +107,7 @@
 
             <?php 
                 //query buat post
-                $query = "SELECT * FROM post JOIN account ON post.username = account.username";
+                $query = "SELECT * FROM post JOIN account ON post.username = account.username WHERE account.username = '".$username."'";
                 $result = $db->query($query);
 
                 foreach($result as $p){
@@ -129,6 +129,22 @@
                 $result = null;
 
             ?>
+
+            <!-- MENAMPILKAN USER SUGGESTION -->
+            
+            <?php
+                $query = "SELECT * FROM account EXCEPT SELECT * FROM account WHERE username='".$username."';";
+                $result = $db->query($query);
+
+                echo '<div><h5>You might know these users..</h5><br>';
+                foreach($result as $r){
+                    echo '<div class="container"><img style="max-width:2em;max-height:2em;" src="../model/img/'.$r[7].'"><b><a href="profile.php?username='.$r[3].'">'.$r[0].' '.$r[1].'</a></b><br></div>';
+                }
+                echo '</div>';
+                $result = null;
+                
+            ?>
+
     </div>
 
 </body>
