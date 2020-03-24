@@ -2,6 +2,8 @@
     session_start();
     include '../model/database.php';
 
+    $user = $_GET['username'];
+
     $post_id = intval($_POST['postId']);
     $comment = $_POST['comment'];
     $name = $_SESSION['name'];
@@ -12,6 +14,6 @@
     $query = 'INSERT INTO comment(username, post_id, body, created_at) VALUES("'.$name.'","'.$post_id.'", "'.$comment.'", "'.$time.'")';
     $db->query($query);
 
-    header("location:../view/home.php");
+    header("location:../view/profile.php?username=$user");
 
 ?>

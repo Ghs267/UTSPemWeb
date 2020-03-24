@@ -8,5 +8,5 @@
     $query = 'INSERT INTO post(username, body, created_at) VALUES("'.$name.'", "'.$posting.'", "'.$time.'")';
     $db->query($query);
 
-    header("location:../view/profil.php");
+    header("location:../view/home.php");
 ?>

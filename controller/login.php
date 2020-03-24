@@ -30,7 +30,7 @@
 
             $_SESSION['name'] = $name[0];
 
-            header("location:../view/profil.php");
+            header("location:../view/home.php");
         }
         else{
             header("location:../view/indexlogin.php");

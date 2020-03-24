@@ -57,9 +57,7 @@
             echo '<img src="../model/img/' . $pic[0] . '" style ="max-width:200px;max-height:200px;"></div>';
 
             //username
-            $result = $db->query("SELECT username FROM account WHERE username='$username'");
-            $name = $result->fetch();
-            echo $name[0];
+            echo $username;
 
         ?> 
 
@@ -113,13 +111,13 @@
                 $result = $db->query($query);
 
                 foreach($result as $p){
-                    echo '<div class="container"><p>'.$p[2].'</p><br>';
+                    echo '<div class="container"><b><a href="profile.php?username='.$p[0].'">'.$p[0].'</a></b><br><p>'.$p[2].'</p><br>';
                     $querycomment = "SELECT * from comment WHERE post_id = '".$p[1]."'";
                     $rescomment = $db->query($querycomment);
 
                     //buat nampilin comment per post
                     foreach($rescomment as $rc){
-                        echo '<div><p>'.$rc[3].'</p></div>';
+                        echo '<div><b><a href="profile.php?username='.$rc[0].'">'.$rc[0].'</a></b><br><p>'.$rc[3].'</p></div>';
                     }
                     echo'<form action="../controller/addcomment.php" method ="post">
                         <input type="text" name="comment" placeholder="Add comment..">

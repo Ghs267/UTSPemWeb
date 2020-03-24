@@ -10,5 +10,5 @@
     move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
     $query = 'UPDATE account SET image = "'.$name.'" WHERE email="'.$username.'" OR username ="'.$user.'"';
     $db->query($query);
-    header("location:../view/profil.php");
+    header("location:../view/home.php");
 ?>
