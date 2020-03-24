@@ -50,14 +50,14 @@
         <?php 
 
             //profpic
-            $username = $_SESSION['username'];
-            $result = $db->query("SELECT image FROM account WHERE username='$username' OR email='$username'");
+            $username = $_SESSION['name'];
+            $result = $db->query("SELECT image FROM account WHERE username='$username'");
             $pic = $result->fetch();
             echo '<div style="width:250px;"><button style="float:right;" onClick="showModal();"><span class="glyphicon glyphicon-camera"></span></button></br>';
             echo '<img src="../model/img/' . $pic[0] . '" style ="max-width:200px;max-height:200px;"></div>';
 
             //username
-            $result = $db->query("SELECT username FROM account WHERE username='$username' OR email='$username'");
+            $result = $db->query("SELECT username FROM account WHERE username='$username'");
             $name = $result->fetch();
             echo $name[0];
 
@@ -94,7 +94,7 @@
         <div>
             <form action="../controller/addpost.php" method="post">
                 <?php 
-                    $result = $db->query("SELECT CONCAT_WS(' ', first_name, last_name) FROM account WHERE username='$username' OR email='$username'");
+                    $result = $db->query("SELECT CONCAT_WS(' ', first_name, last_name) FROM account WHERE username='$username'");
                     $name = $result->fetch();
                     echo '<textarea style="resize:none;" name="posting" rows="4" cols="50" placeholder="Share your day, ' . $name[0] . '.."></textarea>';
                 ?>
@@ -103,30 +103,33 @@
                 
             </form>
             <br>
+        </div>
 
             <!-- SHOW POST -->
 
             <?php 
-                $query = "SELECT * FROM post JOIN account ON post.username = account.username WHERE account.username='$username' OR account.email='$username'";
-                //echo var_dump($query);die;
+                $query = "SELECT * FROM post WHERE post.username='$username'";
                 $result = $db->query($query);
-                //$post = $result->fetch();
-                //echo var_dump($post[0]);die;
 
                 foreach($result as $p){
-                    echo '<div class="container"><p>'.$p[2].'</p>';
-                    echo'<form action="../controller/addcomment.php">
+                    echo '<div class="container"><p>'.$p[2].'</p><br>';
+                    $querycomment = "SELECT * from comment WHERE post_id = '".$p[1]."'";
+                    //echo var_dump($querycomment);die;
+                    $rescomment = $db->query($querycomment);
+
+                    foreach($rescomment as $rc){
+                        echo '<div><p>'.$rc[3].'</p></div>';
+                    }
+                    echo'<form action="../controller/addcomment.php" method ="post">
                         <input type="text" name="comment" placeholder="Add comment..">
-                        <input type="submit" value="comment">
+                        <button value="'.$p[1].'" name="postId">Comment</button>
                     </form>
                     </div>';
                 }
                 
                 $result = null;
-                $db = null;
 
             ?>
-        </div>
     </div>
 
 </body>

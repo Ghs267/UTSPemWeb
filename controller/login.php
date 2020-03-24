@@ -23,6 +23,13 @@
         if($code == $_SESSION['captcha_code']){
             $_SESSION['username'] = $username;
             $_SESSION['status'] = "login";
+
+            $currname = $_SESSION['username'];
+            $res = $db->query("SELECT username FROM account WHERE username='$currname' OR email='$currname'");
+            $name = $res->fetch();
+
+            $_SESSION['name'] = $name[0];
+
             header("location:../view/profil.php");
         }
         else{
