@@ -57,7 +57,7 @@
 
 
 
-        <!-- TOMBOL LOGOUT -->
+        <!-- TOMBOL HOME -->
 
         <a href="home.php" ><button><span class="glyphicon glyphicon-home"></span></button></a>
 
@@ -78,7 +78,7 @@
                     foreach($rescomment as $rc){
                         echo '<div><b><a href="profile.php?username='.$rc[0].'">'.$rc[0].'</a></b><br><p>'.$rc[3].'</p></div>';
                     }
-                    echo'<form action="../controller/addcomment.php" method ="post">
+                    echo'<form action="../controller/addcomment_user.php?username='.$user.'" method ="post">
                         <input type="text" name="comment" placeholder="Add comment..">
                         <button value="'.$p[1].'" name="postId">Comment</button>
                     </form>
