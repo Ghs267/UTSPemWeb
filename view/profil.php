@@ -108,15 +108,16 @@
             <!-- SHOW POST -->
 
             <?php 
+                //query buat post
                 $query = "SELECT * FROM post WHERE post.username='$username'";
                 $result = $db->query($query);
 
                 foreach($result as $p){
                     echo '<div class="container"><p>'.$p[2].'</p><br>';
                     $querycomment = "SELECT * from comment WHERE post_id = '".$p[1]."'";
-                    //echo var_dump($querycomment);die;
                     $rescomment = $db->query($querycomment);
 
+                    //buat nampilin comment per post
                     foreach($rescomment as $rc){
                         echo '<div><p>'.$rc[3].'</p></div>';
                     }
