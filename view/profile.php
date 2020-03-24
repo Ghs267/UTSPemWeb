@@ -66,11 +66,11 @@
 
             <?php 
                 //query buat post
-                $query = "SELECT * FROM post WHERE post.username='$user'";
+                $query = "SELECT * FROM post JOIN account ON post.username = account.username WHERE post.username = '".$user."'";
                 $result = $db->query($query);
 
                 foreach($result as $p){
-                    echo '<div class="container"><b><a href="profile.php?username='.$p[0].'">'.$p[0].'</a></b><br><p>'.$p[2].'</p><br>';
+                    echo '<div class="container"><img style="max-width:2em;max-height:2em;" src="../model/img/'.$p[13].'"><b><a href="profile.php?username='.$p[0].'">'.$p[0].'</a></b><br><p>'.$p[2].'</p><br>';
                     $querycomment = "SELECT * from comment WHERE post_id = '".$p[1]."'";
                     $rescomment = $db->query($querycomment);
 
@@ -78,7 +78,7 @@
                     foreach($rescomment as $rc){
                         echo '<div><b><a href="profile.php?username='.$rc[0].'">'.$rc[0].'</a></b><br><p>'.$rc[3].'</p></div>';
                     }
-                    echo'<form action="../controller/addcomment_user.php?username='.$user.'" method ="post">
+                    echo'<form action="../controller/addcomment.php" method ="post">
                         <input type="text" name="comment" placeholder="Add comment..">
                         <button value="'.$p[1].'" name="postId">Comment</button>
                     </form>
