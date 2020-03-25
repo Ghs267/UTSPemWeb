@@ -33,9 +33,21 @@
 
 </head>
 <body>
-    <header>
-        
-    </header>
+     <!-- SEARCH USER -->
+
+     <div class="container" style="width: 1000px;">
+    
+    <div class="container">
+         <div class="form-group">
+            <div class="input-group">
+                <input type="text" name="search_text" id="search_text" placeholder="Search user.." class="form-control" />
+            </div>
+        </div>
+        <br />
+        <div id="result"></div>
+    </div>
+    <div style="clear:both"></div>
+
 	<div class="container" style="width: 1000px;">
         <!-- PROFILE USER -->
         
@@ -47,7 +59,10 @@
             echo '<img src="../model/img/' . $pic[0] . '" style ="max-width:200px;max-height:200px;"></div>';
 
             //username
-            echo $user;
+            echo '<b>' . $user. '</b><br>';
+            $result = $db->query("SELECT CONCAT_WS(' ', first_name, last_name) FROM account WHERE username='$user'");
+            $name = $result->fetch();
+            echo $name[0];
 
         ?> 
 
@@ -71,6 +86,10 @@
 
                 foreach($result as $p){
                     echo '<div class="container"><img style="max-width:2em;max-height:2em;" src="../model/img/'.$p[13].'"><b><a href="profile.php?username='.$p[0].'">'.$p[0].'</a></b><br><p>'.$p[2].'</p><br>';
+                    if($p[3] != ""){
+                        echo '<img src="../model/post_image/'.$p[3].'">';
+                    }
+                    
                     $querycomment = "SELECT * from comment WHERE post_id = '".$p[1]."'";
                     $rescomment = $db->query($querycomment);
 
@@ -78,7 +97,7 @@
                     foreach($rescomment as $rc){
                         echo '<div><b><a href="profile.php?username='.$rc[0].'">'.$rc[0].'</a></b><br><p>'.$rc[3].'</p></div>';
                     }
-                    echo'<form action="../controller/addcomment_user.php?username='.$user.'" method ="post">
+                    echo'<form action="../controller/addcomment.php" method ="post">
                         <input type="text" name="comment" placeholder="Add comment..">
                         <button value="'.$p[1].'" name="postId">Comment</button>
                     </form>

@@ -38,13 +38,53 @@
                 show: true
             });
         }
+
+        $(document).ready(function(){
+        load_data();
+        function load_data(query)
+        {
+            $.ajax({
+                url:"../controller/fetch.php",
+                method:"post",
+                data:{query:query},
+                success:function(data)
+                {
+                    $('#result').html(data);
+                }
+            });
+        }
+        
+        $('#search_text').keyup(function(){
+            var search = $(this).val();
+            if(search != '')
+            {
+                load_data(search);
+            }
+            else
+            {
+                load_data();			
+            }
+        });
+    });
 	</script>
 </head>
 <body>
-    <header>
-        
-    </header>
-	<div class="container" style="width: 1000px;">
+
+    <!-- SEARCH USER -->
+
+    <div class="container" style="width: 1000px;">
+    
+        <div class="container">
+             <div class="form-group">
+                <div class="input-group">
+                    <input type="text" name="search_text" id="search_text" placeholder="Search user.." class="form-control" />
+                </div>
+            </div>
+            <br />
+            <div id="result"></div>
+        </div>
+        <div style="clear:both"></div>
+
         <!-- PROFILE USER -->
         
         <?php 
@@ -57,7 +97,10 @@
             echo '<img src="../model/img/' . $pic[0] . '" style ="max-width:200px;max-height:200px;"></div>';
 
             //username
-            echo $username;
+            echo '<b>' . $username. '</b><br>';
+            $result = $db->query("SELECT CONCAT_WS(' ', first_name, last_name) FROM account WHERE username='$username'");
+            $name = $result->fetch();
+            echo $name[0];
 
         ?> 
 
@@ -90,11 +133,12 @@
 
         <!-- FORM POST -->
         <div>
-            <form action="../controller/addpost.php" method="post">
+            <form action="../controller/addpost.php" method="post" enctype="multipart/form-data">
                 <?php 
                     $result = $db->query("SELECT CONCAT_WS(' ', first_name, last_name) FROM account WHERE username='$username'");
                     $name = $result->fetch();
                     echo '<textarea style="resize:none;" name="posting" rows="4" cols="50" placeholder="Share your day, ' . $name[0] . '.."></textarea>';
+                    echo '<input type="file" name="gambar" id="gambar" accept="image/jpeg, image/jpg, image/png">'; 
                 ?>
                 </br>
                 <input type="submit" value="Post">
@@ -112,6 +156,10 @@
 
                 foreach($result as $p){
                     echo '<div class="container"><img style="max-width:2em;max-height:2em;" src="../model/img/'.$p[13].'"><b><a href="profile.php?username='.$p[0].'">'.$p[0].'</a></b><br><p>'.$p[2].'</p><br>';
+                    if($p[3] != ""){
+                        echo '<img src="../model/post_image/'.$p[3].'">';
+                    }
+                    
                     $querycomment = "SELECT * from comment WHERE post_id = '".$p[1]."'";
                     $rescomment = $db->query($querycomment);
 
