@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(isset($_SESSION['status'])){
-        header("location:../controller/logout.php");
+        header("location:controller/logout.php");
     }
 ?>
 
@@ -27,19 +27,19 @@
         <meta name="author" content="Colorlib">
         <meta name="keywords" content="Colorlib Templates">
         
-        <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-        <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+        <link href="view/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+        <link href="view/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-        <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-        <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+        <link href="view/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+        <link href="view/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
-        <link href="css/main.css" rel="stylesheet" media="all">
+        <link href="view/css/main.css" rel="stylesheet" media="all">
 
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/select2/select2.min.js"></script>
-        <script src="vendor/datepicker/moment.min.js"></script>
-        <script src="vendor/datepicker/daterangepicker.js"></script>
-        <script src="js/global.js"></script>
+        <script src="view/vendor/jquery/jquery.min.js"></script>
+        <script src="view/vendor/select2/select2.min.js"></script>
+        <script src="view/vendor/datepicker/moment.min.js"></script>
+        <script src="view/vendor/datepicker/daterangepicker.js"></script>
+        <script src="view/js/global.js"></script>
 
     
         <script type="text/javascript">
@@ -49,7 +49,7 @@
                 location.reload(true);
             }
             function refresh(){
-                $('#captcha_image').attr('src', '../model/image.php');
+                $('#captcha_image').attr('src', 'model/image.php');
             }
             function validasi() {
                 var email = document.getElementById("username").value;
@@ -72,7 +72,7 @@
                     }
                     else{
                         $.ajax({
-                        url:"../controller/check_code.php",
+                        url:"controller/check_code.php",
                         method:"POST",
                         data:{code:code},
                         success:function(data)
@@ -113,7 +113,7 @@
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Login</h2>
-                    <form id="captch_form" action="../controller/login.php" method="post" onSubmit="return validasi();">
+                    <form id="captch_form" action="controller/login.php" method="post" onSubmit="return validasi();">
 
                     <!--email/username & password-->
 
@@ -132,8 +132,8 @@
                         </div>
             
             <div id="captcha_div">
-                <img src="../UTSPemweb" alt="">
-                <img src="../model/image.php" id="captcha_image" class="btn--submitcaptcha" />
+                <img src="UTSPemweb" alt="">
+                <img src="model/image.php" id="captcha_image" class="btn--submitcaptcha" />
                 <button style="margin-x:2em;" type="button" onClick="refresh();">refresh</button><br>
                 <br>
 
@@ -154,7 +154,7 @@
             ?> 
         </form>
         <br><br>
-        <h5>Don't have an account? <a href="register_form.php">REGISTER</a> here</h5>
+        <h5>Don't have an account? <a href="view/register_form.php">REGISTER</a> here</h5>
             </div>
             </div>
             </div>

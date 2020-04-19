@@ -25,7 +25,7 @@ if(isset($_POST["query"]))
 		{
 			$output .= '
 				<tr>
-					<td><img src="../model/img/'.$row[7].'" style="max-width:2em;max-height:2em;"><p><a href="../view/profile.php?username='.$row[3].'">'.$row[3].'</a></p></td>
+					<td><img src="../model/img/'.$row[7].'" style="max-width:2em;max-height:2em;border-radius:2em;"><p style="color:white;"><a href="../view/profile.php?username='.$row[3].'">'.$row[3].'</a></p></td>
 				</tr>
 			';
 		}
@@ -33,7 +33,7 @@ if(isset($_POST["query"]))
 	}
 	else
 	{
-		echo 'Data Not Found';
+		echo '<p style="color:white;">Username Not Found!</p>';
 	}
 }
 

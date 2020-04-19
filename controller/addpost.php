@@ -10,10 +10,27 @@
     $target_dir = "../model/post_image/";
     $target_file = $target_dir . basename($_FILES["gambar"]["name"]);
 
-    move_uploaded_file($_FILES['gambar']['tmp_name'],$target_dir.$pic);
-   
-    $query = 'INSERT INTO post(username, body, created_at, picture) VALUES("'.$name.'", "'.$posting.'", "'.$time.'", "'.$pic.'")';
-    $db->query($query);
+    if($posting=="" && $pic==""){
+        header("location:../view/home.php");
+    }
+    else if($posting==""){
+        move_uploaded_file($_FILES['gambar']['tmp_name'],$target_dir.$pic);
+        $query = 'INSERT INTO post(username, body, created_at, picture) VALUES("'.$name.'", NULL, "'.$time.'", "'.$pic.'")';
+        $db->query($query);
+        header("location:../view/home.php");
+    }
+    else if($pic==""){
+        $query = 'INSERT INTO post(username, body, created_at, picture) VALUES("'.$name.'", "'.$posting.'", "'.$time.'", NULL)';
+        $db->query($query);
+        header("location:../view/home.php");
+    }else{
+        move_uploaded_file($_FILES['gambar']['tmp_name'],$target_dir.$pic);
+        $query = 'INSERT INTO post(username, body, created_at, picture) VALUES("'.$name.'", "'.$posting.'", "'.$time.'", "'.$pic.'")';
+        $db->query($query);
+        header("location:../view/home.php");
+    }
 
-    header("location:../view/home.php");
+    
+
+    
 ?>

@@ -37,8 +37,9 @@
             }
             $query = "INSERT into account VALUES ('$firstname','$lastname','$email','$username','".md5($password)."', '$birth_date','$gender', '$name')";
             $result = $db->query($query);
+            $_SESSION['message'] = "Register success!";
             if($result){
-                header("location:../view/register_success.php");
+                header("location:../view/register_form.php");
             }
         }
     }

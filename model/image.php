@@ -14,7 +14,7 @@
 
     $image = imagecreatetruecolor(200, 38);
 
-    $background_color = imagecolorallocate($image, 231, 100, 18);
+    $background_color = imagecolorallocate($image, 109, 104, 117);
 
     $text_color = imagecolorallocate($image, 255, 255, 255);
 
